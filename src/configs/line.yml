@@ -1,10 +1,16 @@
+# グラフ1つ分の設定
 line:
   csvpath: C:\Users\3meko\Dev\my_tools\RealtimeGraphViewer\test\testdata.csv
+
+  label: #凡例のラベル
+    text: "redline" 
+    fontsize: 16
+
   xcol: xcol #x軸の列名 列番号でもOK
   ycol: ycol #y軸の列名 列番号でもOK
-  stdcol: std #標準偏差の列名 列番号でもOK
+  stdcol: std #標準偏差の列名 列番号でもOK. nullでもOK
 
-  color: [255,0,0]
+  color: [255,0,0] #グラフの色
 
   marker:
     style: "" #o, s, x, +, *
@@ -13,8 +19,4 @@ line:
   linestyle:
     style: "-" #-, --, -., :, steps, ...
     width: 6
-
-  label: 
-    text: "redline"
-    fontsize: 16
 

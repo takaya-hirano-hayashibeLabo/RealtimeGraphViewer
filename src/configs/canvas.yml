@@ -1,31 +1,35 @@
+# グラフ全体の設定
 canvas:
+
   figsize:
     width: 20 #[cm]
     height: 10 #[cm]
+
   fontstyle: 
     family: "serif" #Arial, serif
-  title:
+
+  title: #グラフタイトル
     text: "title"
     fontsize: 30
-  label: 
+
+  label: #xy軸のラベル
     xlabel: xlabel
     ylabel: ylabel
     fontsize: 18
-  ticks:
-    xwidth: 5 # 目盛りの幅
+
+  ticks: # 目盛りの幅. limitにnullが指定されると無視される
+    xwidth: 5 
     ywidth: 10
     fontsize: 12
-  legend:
+
+  legend: #凡例のフォントサイズ
     fontsize: 12
+
   grid:
     visible: true
     alpha: 0.5
-  padding:
-    top: 10
-    bottom: 10
-    left: 10
-    right: 10
-  limit:
+
+  limit: #xy軸の範囲
     xmin: 0
     xmax: null
     ymin: 0
