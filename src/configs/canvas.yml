@@ -1,0 +1,32 @@
+canvas:
+  figsize:
+    width: 20 #[cm]
+    height: 10 #[cm]
+  fontstyle: 
+    family: "serif" #Arial, serif
+  title:
+    text: "title"
+    fontsize: 30
+  label: 
+    xlabel: xlabel
+    ylabel: ylabel
+    fontsize: 18
+  ticks:
+    xwidth: 5 # 目盛りの幅
+    ywidth: 10
+    fontsize: 12
+  legend:
+    fontsize: 12
+  grid:
+    visible: true
+    alpha: 0.5
+  padding:
+    top: 10
+    bottom: 10
+    left: 10
+    right: 10
+  limit:
+    xmin: 0
+    xmax: null
+    ymin: 0
+    ymax: null
