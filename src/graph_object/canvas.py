@@ -29,6 +29,7 @@ class Canvas(IGraphObject):
             self.__cm2inch(config['figsize']['height'])
         ),dpi=100)
         self.figure.suptitle(config['title']['text'], fontsize=config['title']['fontsize'])
+        self.__set_axscale()
         self.ax.set_xlabel(config['label']['xlabel'], fontsize=config['label']['fontsize'])
         self.ax.set_ylabel(config['label']['ylabel'], fontsize=config['label']['fontsize'])
         self.__set_xylim()
@@ -82,3 +83,12 @@ class Canvas(IGraphObject):
             self.ax.set_yticks(yticks)
             self.ax.set_yticklabels(yticks,fontsize=self.config["ticks"]["fontsize"])
 
+
+    def __set_axscale(self):
+        """
+        対数軸とかの設定をする
+        """
+        if self.config["axscale"]["x"] == "log":
+            self.ax.set_xscale("log")
+        if self.config["axscale"]["y"] == "log":
+            self.ax.set_yscale("log")

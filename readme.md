@@ -9,6 +9,7 @@ yml形式のconfigを書き換えると, リアルタイムにグラフを書き
 ### アプリの起動
 ~~~bash
 python app.py --config_root {描画設定のテンプレートがあるパス} --fps {描画のFPS} --saveto {描画設定を保存するパス}
+#実行例) python app.py --config_root src/configs --fps 4 --saveto history/data
 ~~~
 
 - `--congfig_root`  
