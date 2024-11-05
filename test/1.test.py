@@ -20,8 +20,8 @@ def is_config_changed(objects: list[IGraphObject]):
 
 FPS=4
 
-line = Line(ROOT_DIR / 'src/configs/line.yml')
-canvas = Canvas(ROOT_DIR / 'src/configs/canvas.yml')
+line = Line(ROOT_DIR / 'src/configs/line/line.yml')
+canvas = Canvas(ROOT_DIR / 'src/configs/line/canvas.yml')
 objects=[line,canvas]
 canvas.show([line],dt=1/FPS)
 while True:

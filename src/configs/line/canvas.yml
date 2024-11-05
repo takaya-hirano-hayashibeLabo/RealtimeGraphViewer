@@ -19,8 +19,16 @@ canvas:
 
   ticks: # 目盛りの幅. limitにnullが指定されると無視される
     xwidth: 5 
+    xbias: 0 #x軸の実際のgrid線のbias
+    xlabel_bias: 0 #x軸のラベルのbias(=描画される数字のbias)
+
     ywidth: 10
+    ybias: 0.0 #y軸の実際のgrid線のbias
+    ylabel_bias: 0 #y軸のラベルのbias(=描画される数字のbias)
+
     fontsize: 12
+    num_decimal_places: 1 #小数点以下の桁数
+
 
   legend: #凡例のフォントサイズ
     fontsize: 12
@@ -34,3 +42,7 @@ canvas:
     xmax: null
     ymin: 0
     ymax: null
+
+  axscale: #xy軸のスケール. 対数軸か否か
+    x: linear #linear, log
+    y: linear #linear, log

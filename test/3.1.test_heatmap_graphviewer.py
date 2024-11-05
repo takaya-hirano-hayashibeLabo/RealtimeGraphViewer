@@ -7,7 +7,7 @@ sys.path.append(str(ROOT_DIR))
 from src.graph_viewer import GraphViewer
 
 FPS=4
-CONFIG_ROOT=ROOT_DIR / "src/configs/line"
+CONFIG_ROOT=ROOT_DIR / "src/configs/heatmap"
 
 viewer=GraphViewer(CONFIG_ROOT)
 

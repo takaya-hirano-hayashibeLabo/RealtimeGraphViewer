@@ -3,23 +3,17 @@ import pandas as pd
 import yaml
 import numpy as np
 
-from .interface_graph_object import IGraphObject
+from .interface_line import ILine
 
-class Line(IGraphObject):
-    def __init__(self,config_path: str):
-        self.config_path = config_path
-        self.load_config()
-
-    def load_config(self):
-        self.config = yaml.safe_load(open(self.config_path,encoding='utf-8'))["line"]
-
-    def __read_csv(self):
-        self.df = pd.read_csv(self.config['csvpath'])
+class Line(ILine):
+    """
+    線分のグラフを描画するクラス
+    """
 
     def draw(self,ax: plt.Axes):
         self.load_config()
 
-        self.__read_csv()
+        self.read_csv()
 
         self.__plot_line(ax)
         self.__draw_std(ax)
@@ -68,8 +62,3 @@ class Line(IGraphObject):
             std = self.df.iloc[:,int(stdcol_key)]
         return std.values
 
-    def is_config_changed(self) -> bool:
-        new_config = yaml.safe_load(open(self.config_path,encoding='utf-8'))["line"]
-        if self.config != new_config: 
-            return True
-        return False

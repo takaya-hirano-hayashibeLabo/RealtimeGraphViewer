@@ -4,7 +4,9 @@ import yaml
 import matplotlib.pyplot as plt
 from .graph_object.canvas import Canvas
 from .graph_object.line import Line
-from .graph_object.interface_graph_object import IGraphObject
+from .graph_object.heatmap import Heatmap
+
+from .graph_object.interface_line import ILine
 
 class GraphViewer:
     """
@@ -18,7 +20,7 @@ class GraphViewer:
         self.canvas:Canvas
         self.__init_canvas()
 
-        self.lines:list[IGraphObject]=[]
+        self.lines:list[ILine]=[]
         self.__init_lines()
 
         self.config_paths:list[Path]=self.__load_line_config_paths()
@@ -101,7 +103,7 @@ class GraphViewer:
         for conf_file in conf_files:
             conf_path=self.config_root / conf_file
             config_key=list(yaml.safe_load(open(conf_path,encoding='utf-8')).keys())[0]
-            if config_key=="line":
+            if config_key!="canvas": #canvasは別で管理している
                 line_config_paths.append(conf_path)
         
         return line_config_paths
@@ -150,6 +152,9 @@ class GraphViewer:
             if self.__is_new_line_config(line_config_path):
 
                 config_key=list(yaml.safe_load(open(line_config_path,encoding='utf-8')).keys())[0]
+                print(config_key)
                 if config_key=="line":
                     self.lines.append(Line(line_config_path))
+                elif config_key=="heatmap":
+                    self.lines.append(Heatmap(line_config_path))
 
