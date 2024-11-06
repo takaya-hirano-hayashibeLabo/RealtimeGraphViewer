@@ -32,7 +32,7 @@ def main():
         try:
             viewer.step_view(fps)
         except Exception as e:
-            pass
+            print(e)
 
 
 if __name__=="__main__":

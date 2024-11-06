@@ -4,6 +4,7 @@ import yaml
 import seaborn as sns
 sns.set(style="darkgrid")
 from matplotlib import rcParams
+rcParams['text.usetex'] = True
 import numpy as np
 
 from .interface_graph_object import IGraphObject
@@ -23,6 +24,7 @@ class Canvas(IGraphObject):
     def __init_canvas(self,config: dict):
         # Example of using the configuration
         rcParams['font.family'] = config['fontstyle']['family']
+
         self.figure, self.ax = plt.subplots(1,1,figsize=(
             self.__cm2inch(config['figsize']['width']), 
             self.__cm2inch(config['figsize']['height'])
@@ -35,10 +37,13 @@ class Canvas(IGraphObject):
         self.ax.set_ylabel(config['label']['ylabel'], fontsize=config['label']['fontsize'])
         self.__set_grid()
         self.__set_xylim()
-        self.__set_xyticks()
         self.__set_axscale()
+        self.__set_ticks_bar()
+        self.__set_ticks_label()
         self.__set_legend()
         self.__set_colorbar()
+        self.__adjust_margins()
+
     def __cm2inch(self,cm):
         return cm / 2.54
     
@@ -61,7 +66,7 @@ class Canvas(IGraphObject):
 
         self.__set_canvas_params(self.config)
 
-        plt.tight_layout()
+        # plt.tight_layout()
 
         plt.pause(dt)
 
@@ -72,37 +77,77 @@ class Canvas(IGraphObject):
             self.ax.set_ylim(self.config["limit"]["ymin"], self.config["limit"]["ymax"])
 
 
-    def __set_xyticks(self):
+    def __get_ticks_value(self,axis:str="x"):
         """
-        目盛りの設定
+        メモリの軸の数値の設定
+        :param axis: "x" or "y"
         """
-
-        if self.config["limit"]["xmax"] is not None and self.config["limit"]["xmin"] is not None: 
+        if axis=="x":
             xtick_max = self.ax.get_xlim()[1]
             xtick_min = self.ax.get_xlim()[0]
             step=(xtick_max-xtick_min)/self.config["ticks"]["xwidth"]
             xbias = self.config["ticks"]["xbias"]
             xticks = np.arange(xtick_min, xtick_max, step) + xbias
-            self.ax.set_xticks(xticks)
-
-            ticks_labels=[
-                f"{(val):.{self.config['ticks']['num_decimal_places']}f}" for val in xticks
-            ]
-            self.ax.set_xticklabels(ticks_labels,fontsize=self.config["ticks"]["fontsize"])         
-
-        if self.config["limit"]["ymax"] is not None and self.config["limit"]["ymin"] is not None: 
+            return xticks
+        elif axis=="y":
             ytick_max = self.ax.get_ylim()[1]
-            ytick_min = self.ax.get_ylim()[0]
+            ytick_min = self.ax.get_ylim()[0]   
             step=(ytick_max-ytick_min)/self.config["ticks"]["ywidth"]
             ybias = self.config["ticks"]["ybias"]
             yticks = np.arange(ytick_min, ytick_max, step) + ybias
+            return yticks
+
+
+    def __ticks_value2label(self,ticks:list[float]):
+        if self.config["ticks"]["num_type"] == "decimal":
+            labels=[
+                f"{(val):.{self.config['ticks']['num_decimal_places']}f}" for val in ticks
+            ]
+            return labels
+        elif self.config["ticks"]["num_type"] == "scientific":
+            labels = []
+            for val in ticks:
+                exponent = int(np.floor(np.log10(abs(val)))) if val != 0 else 0
+                base = val / 10**exponent
+                labels.append(f"${base:.1f} \\times 10^{{{exponent}}}$")
+            return labels
+
+    def __set_ticks_bar(self):
+        """
+        メモリの軸の数値の設定
+        """
+        if self.config["limit"]["xmax"] is not None and self.config["limit"]["xmin"] is not None: 
+            xticks = self.__get_ticks_value(axis="x")
+            self.ax.set_xticks(xticks)
+
+        if self.config["limit"]["ymax"] is not None and self.config["limit"]["ymin"] is not None: 
+            yticks = self.__get_ticks_value(axis="y")
             self.ax.set_yticks(yticks)
 
-            ticks_labels=[
-                f"{(val):.{self.config['ticks']['num_decimal_places']}f}" for val in yticks
-            ]
-            self.ax.set_yticklabels(ticks_labels,fontsize=self.config["ticks"]["fontsize"])
+    def __set_ticks_label(self):
+        """
+        メモリの軸の数値のラベルの設定
+        """
+        if not self.config["ticks"]["visible"]["xlabel"]:
+            self.ax.set_xticklabels([])
+        else:
+            if self.config["limit"]["xmax"] is not None and self.config["limit"]["xmin"] is not None: 
+                xticks = self.__get_ticks_value(axis="x")
+                ticks_labels=self.__ticks_value2label(xticks)
+                self.ax.set_xticklabels(ticks_labels,fontsize=self.config["ticks"]["fontsize"])  
+            else:
+                self.ax.tick_params(axis='x',labelsize=self.config["ticks"]["fontsize"])  
 
+
+        if not self.config["ticks"]["visible"]["ylabel"]:
+            self.ax.set_yticklabels([])
+        else:
+            if self.config["limit"]["ymax"] is not None and self.config["limit"]["ymin"] is not None: 
+                yticks = self.__get_ticks_value(axis="y")
+                ticks_labels=self.__ticks_value2label(yticks)
+                self.ax.set_yticklabels(ticks_labels,fontsize=self.config["ticks"]["fontsize"])
+            else:
+                self.ax.tick_params(axis='y',labelsize=self.config["ticks"]["fontsize"])
 
     def __set_axscale(self):
         """
@@ -119,9 +164,13 @@ class Canvas(IGraphObject):
 
 
     def __set_legend(self):
-        handles, labels = self.ax.get_legend_handles_labels()
-        if handles:
-            self.ax.legend(fontsize=self.config['legend']['fontsize'])
+        if self.config["legend"]["visible"]:
+            handles, labels = self.ax.get_legend_handles_labels()
+            if handles:
+                self.ax.legend(
+                    fontsize=self.config['legend']['fontsize'],
+                    loc=self.config['legend']['loc']
+                    )
 
     def __set_colorbar(self):
         """
@@ -130,3 +179,22 @@ class Canvas(IGraphObject):
         if len(self.ax.images) > 0:
             cbar=plt.colorbar(self.ax.images[0], ax=self.ax,orientation='vertical')
             cbar.ax.tick_params(labelsize=self.config["ticks"]["fontsize"])
+
+
+    def __adjust_margins(self):
+        """
+        グラフの余白を調整する
+        """
+        margins = self.config.get("margin", {})
+        left = self.__cm2inch(margins.get("left", 0))
+        right = self.__cm2inch(margins.get("right", 0))
+        top = self.__cm2inch(margins.get("top", 0))
+        bottom = self.__cm2inch(margins.get("bottom", 0))
+
+        # 負の値が入ったら、余白をその分だけ減らす
+        self.figure.subplots_adjust(
+            left=max(0, self.figure.subplotpars.left + left / self.figure.get_figwidth()),
+            right=min(1, self.figure.subplotpars.right - right / self.figure.get_figwidth()),
+            top=min(1, self.figure.subplotpars.top - top / self.figure.get_figheight()),
+            bottom=max(0, self.figure.subplotpars.bottom + bottom / self.figure.get_figheight())
+        )
