@@ -34,7 +34,7 @@ class Line(ILine):
             x,y=self.__get_xy()
             std = self.__get_std()
             ax.fill_between(
-                x, y-std, y+std, alpha=0.5,
+                x, y-std, y+std, alpha=0.2,
                 color=np.array(self.config['color'])/255
             )
 

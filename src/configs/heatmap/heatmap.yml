@@ -1,16 +1,21 @@
 # グラフ1つ分の設定
 heatmap:
-  csvpath: C:\Users\3meko\Dev\my_tools\RealtimeGraphViewer\test\testdata.csv
-
-  label: #凡例のラベル
-    text: "heatmap1" 
-    fontsize: 16
-
-  valuecol: xcol #ヒートマップの値そのものの列名. indexでもOK
-  y: 0 #ヒートマップを描画するy軸の位置
+  csvpath: C:\Users\3meko\Dev\my_tools\RealtimeGraphViewer\src\configs\heatmap\testheat.csv
 
   cmap: viridis #カラーマップ
 
-  boundary: #ヒートマップの境界線
-    color: white
-    linewidth: 2
+  is_transposed: true #転置するかどうか
+
+  colorbar:
+    visible: true #カラーバーを表示するかどうか
+
+    label: #カラーバーのラベル
+      text: "colorbar"
+      fontsize: 18
+
+    ticks: #カラーバーの目盛り
+      fontsize: 8
+      norm: linear #カラーバーのスケール {linear, log, symlog }
+      limit: #ヒートマップの値の範囲 
+        vmin: 0.5
+        vmax: null

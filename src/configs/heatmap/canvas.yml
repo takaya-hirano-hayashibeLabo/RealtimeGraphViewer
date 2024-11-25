@@ -2,43 +2,58 @@
 canvas:
 
   figsize:
-    width: 20 #[cm]
-    height: 10 #[cm]
+    height: 8.6 #[cm]
+    width: 16 #[cm]
 
   fontstyle: 
     family: "serif" #Arial, serif
 
   title: #グラフタイトル
-    text: "title"
-    fontsize: 30
-
-  label: #xy軸のラベル
-    xlabel: xlabel
-    ylabel: ylabel
+    text: 
     fontsize: 18
 
-  legend: #凡例のフォントサイズ
-    fontsize: 12
+  label: #xy軸のラベル
+    xlabel: "x"
+    ylabel: yindex
+    fontsize: 22
 
   grid:
     alpha: 0.0
 
-  limit: #xy軸の範囲
-    xmin: 0
-    xmax: null
-    ymin: -0.5
-    ymax: 2.5
-
-  ticks: # 目盛りの幅. limitにnullが指定されると無視される
-    xwidth: 5 
-    xbias: 0 #x軸の実際のgrid線のbias
-
-    ywidth: 3
-    ybias: 0.5 #y軸の実際のgrid線のbias
-
-    fontsize: 12
-    num_decimal_places: 0 #小数点以下の桁数
-
   axscale: #xy軸のスケール. 対数軸か否か
     x: linear #linear, log
     y: linear #linear, log
+
+  margin: #グラフの余白差分. グラフの余白がデフォルトからどれくらい変更されるか
+    left: 0 #[cm]
+    right: -1 #[cm]
+    top: -1 #[cm]
+    bottom: 1 #[cm]
+
+  limit: #xy軸の範囲
+    xmin: null
+    xmax: null
+    ymin: null
+    ymax: null
+
+  ticks: # 目盛りについて. limitにnullが指定されると無視される
+    visible: 
+      xlabel: true
+      ylabel: true
+
+    xwidth: 2
+    xbias: 0
+    xlabel_bias: 0
+
+    ywidth: 5
+    ybias: 0
+    ylabel_bias: 0
+
+    fontsize: 16
+    num_decimal_places: 1 #小数点以下の桁数
+    num_type: decimal #decimal, scientific
+
+  legend: #凡例のフォントサイズ
+    visible: false
+    fontsize: 14
+    loc: lower center #upper right, upper left, lower left, lower right

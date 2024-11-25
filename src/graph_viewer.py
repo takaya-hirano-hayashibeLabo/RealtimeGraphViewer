@@ -94,13 +94,16 @@ class GraphViewer:
 
     def __load_line_config_paths(self):
         """
-        キーが`line`のymlファイルのパスリストを返す
+        キーが`canvs`以外のymlファイルのパスリストを返す
         """
         line_config_paths=[]
 
         conf_files=os.listdir(self.config_root)
 
         for conf_file in conf_files:
+
+            if not conf_file.endswith(".yml"): continue #ymlファイルでなければ無視
+
             conf_path=self.config_root / conf_file
             config_key=list(yaml.safe_load(open(conf_path,encoding='utf-8')).keys())[0]
             if config_key!="canvas": #canvasは別で管理している

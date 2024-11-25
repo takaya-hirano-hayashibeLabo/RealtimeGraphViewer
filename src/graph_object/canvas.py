@@ -41,7 +41,6 @@ class Canvas(IGraphObject):
         self.__set_ticks_bar()
         self.__set_ticks_label()
         self.__set_legend()
-        self.__set_colorbar()
         self.__adjust_margins()
 
     def __cm2inch(self,cm):
@@ -171,14 +170,6 @@ class Canvas(IGraphObject):
                     fontsize=self.config['legend']['fontsize'],
                     loc=self.config['legend']['loc']
                     )
-
-    def __set_colorbar(self):
-        """
-        1つ目のimshowのカラーバーを設定する
-        """
-        if len(self.ax.images) > 0:
-            cbar=plt.colorbar(self.ax.images[0], ax=self.ax,orientation='vertical')
-            cbar.ax.tick_params(labelsize=self.config["ticks"]["fontsize"])
 
 
     def __adjust_margins(self):
