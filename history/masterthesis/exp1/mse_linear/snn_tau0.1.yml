@@ -1,0 +1,22 @@
+# グラフ1つ分の設定
+line:
+  csvpath: C:\Users\3meko\Dev\HayashibeLab\workspace\DynamicSNN\history\master_thesis\exp1\linear\result_tau0.100\results.csv
+
+  label: #凡例のラベル
+    text: SNN ($\tau=0.1$)
+    fontsize: 16
+
+  xcol: timescale #x軸の列名 列番号でもOK
+  ycol: lif_mean #y軸の列名 列番号でもOK
+  stdcol: null #標準偏差の列名 列番号でもOK. nullでもOK
+
+  color: [55,90,140] #グラフの色
+
+  marker:
+    style: "s" #o, s, x, +, *
+    size: 5
+
+  linestyle:
+    style: "--" #-, --, -., :, steps, ...
+    width: 1
+

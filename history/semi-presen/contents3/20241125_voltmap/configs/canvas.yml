@@ -2,8 +2,8 @@
 canvas:
 
   figsize:
-    height: 8.6 #[cm]
-    width: 16 #[cm]
+    height: 8.55 #[cm]
+    width: 9.92 #[cm]
 
   fontstyle: 
     family: "serif" #Arial, serif
@@ -13,8 +13,8 @@ canvas:
     fontsize: 18
 
   label: #xy軸のラベル
-    xlabel: "x"
-    ylabel: yindex
+    xlabel: "timestep"
+    ylabel: Neuron Index
     fontsize: 22
 
   grid:
@@ -25,16 +25,16 @@ canvas:
     y: linear #linear, log
 
   margin: #グラフの余白差分. グラフの余白がデフォルトからどれくらい変更されるか
-    left: 0 #[cm]
-    right: -1 #[cm]
-    top: -1 #[cm]
+    left: 0.6 #[cm]
+    right: -0. #[cm]
+    top: -0.7 #[cm]
     bottom: 1 #[cm]
 
   limit: #xy軸の範囲
     xmin: null
     xmax: null
-    ymin: null
-    ymax: null
+    ymin: -0.5
+    ymax: 10.5
 
   ticks: # 目盛りについて. limitにnullが指定されると無視される
     visible: 
@@ -45,16 +45,15 @@ canvas:
     xbias: 0
     xlabel_bias: 0
 
-    ywidth: 5
-    ybias: 0
+    ywidth: 10
+    ybias: 0.5
     ylabel_bias: 0
 
     fontsize: 16
-    num_decimal_places: 1 #小数点以下の桁数
+    num_decimal_places: 0 #小数点以下の桁数
     num_type: decimal #decimal, scientific
 
   legend: #凡例のフォントサイズ
-    visible: true
-    fontsize: 10
-    bbox_to_anchor: [0.5, 1.4] #legendの位置の調整 [x座標, y座標] (これは色々いじってみる)
-    ncol: 2 #legendの列数
+    visible: false
+    fontsize: 14
+    loc: lower center #upper right, upper left, lower left, lower right

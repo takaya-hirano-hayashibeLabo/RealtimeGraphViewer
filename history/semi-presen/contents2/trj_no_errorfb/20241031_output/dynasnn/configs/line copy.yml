@@ -1,0 +1,21 @@
+# グラフ1つ分の設定
+line:
+  csvpath: C:\Users\3meko\Dev\HayashibeLab\workspace\ur5e_ik_control\main\history\semi_presen\contents2\get_fft\results\actual_trj\20241031_output\dynasnn\results.csv
+
+  label: #凡例のラベル
+    text: "$y=x$" 
+
+  xcol: timescale #x軸の列名 列番号でもOK
+  ycol:  timescale #y軸の列名 列番号でもOK
+  stdcol:  #標準偏差の列名 列番号でもOK. nullでもOK
+
+  color: [174,174,174] #グラフの色
+
+  marker:
+    style: "" #o, s, x, +, *
+    size: 6
+
+  linestyle:
+    style: "--" #-, --, -., :, steps, ...
+    width: 1
+

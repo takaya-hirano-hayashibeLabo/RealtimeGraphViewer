@@ -1,65 +1,64 @@
 # グラフ全体の設定
 canvas:
-  seaborn_style: "whitegrid" #darkgrid, seaborn-whitegrid
+  seaborn_style: "darkgrid" #darkgrid, seaborn-whitegrid
   frame_visible: false #枠を表示するかどうか
 
   figsize:
     width: 15 #[cm]
-    height: 15 #[cm]
+    height: 8.55 #[cm]
 
   fontstyle: 
     family: "serif" #Arial, serif
 
   title: #グラフタイトル
-    text: 
-    fontsize: 30
+    text: Linear
+    fontsize: 14
 
   label: #xy軸のラベル
-    xlabel: 
-    ylabel: 
-    fontsize: 18
+    xlabel: timescale $a$
+    ylabel: MSE
+    fontsize: 14
 
   ticks: # 目盛りの幅. limitにnullが指定されると無視される
 
     visible: 
-      xlabel: false
-      ylabel: false
+      xlabel: true
+      ylabel: true
 
     xwidth: 5 
     xbias: 0 #x軸の実際のgrid線のbias
     xlabel_bias: 0 #x軸のラベルのbias(=描画される数字のbias)
 
-    ywidth: 10
+    ywidth: 8
     ybias: 0.0 #y軸の実際のgrid線のbias
     ylabel_bias: 0 #y軸のラベルのbias(=描画される数字のbias)
 
     fontsize: 12
     num_decimal_places: 1 #小数点以下の桁数
-    num_type: decimal #decimal, scientific
+    num_type: scientific #decimal, scientific
 
 
   legend: #凡例のフォントサイズ
     visible: true
-    fontsize: 10
-    bbox_to_anchor: [0.5, 1.4] #legendの位置の調整 [x座標, y座標] (これは色々いじってみる)
+    fontsize: 8
+    bbox_to_anchor: [0.5, 1.35] #legendの位置の調整 [x座標, y座標] (これは色々いじってみる)
     ncol: 2 #legendの列数
 
-
   grid:
-    alpha: 0.0
+    alpha: 1.0
 
   limit: #xy軸の範囲
     xmin: 0
-    xmax: 80
-    ymin: 0
-    ymax: null
+    xmax: null
+    ymin: null
+    ymax: 0.1
 
   axscale: #xy軸のスケール. 対数軸か否か
-    x: linear #linear, log
-    y: linear #linear, log
+    x: log #linear, log
+    y: log #linear, log
 
   margin: #グラフの余白差分. グラフの余白がデフォルトからどれくらい変更されるか
-    left: 0. #[cm]
-    right: 0 #[cm]
-    top: -0 #[cm]
-    bottom: -0 #[cm]
+    left: 0 #[cm]
+    right: -0. #[cm]
+    top: 1.2 #[cm]
+    bottom: 0.5 #[cm]

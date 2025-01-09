@@ -1,0 +1,21 @@
+# グラフ1つ分の設定
+heatmap:
+  csvpath: C:\Users\3meko\Dev\HayashibeLab\workspace\DynamicSNN\history\semi_presen\research\view_volt_cmap\20241124\train-multitime_output_0902_gesture_snn_snn-tau_middle\a5.00\batch-head6_batch-idx13\scaled_v_a5.00.csv
+
+  cmap: viridis #カラーマップ
+
+  is_transposed: true #転置するかどうか
+
+  colorbar:
+    visible: true #カラーバーを表示するかどうか
+
+    label: #カラーバーのラベル
+      text: Volatage
+      fontsize: 18
+
+    ticks: #カラーバーの目盛り
+      fontsize: 14
+      norm: symlog #カラーバーのスケール {linear, log, symlog }
+      limit: #ヒートマップの値の範囲 
+        vmin: -10
+        vmax: 0.1

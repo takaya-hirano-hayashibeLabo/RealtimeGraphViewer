@@ -1,0 +1,21 @@
+# グラフ1つ分の設定
+line:
+  csvpath: C:\Users\3meko\Dev\HayashibeLab\workspace\ur5e_ik_control\main\history\semi_presen\contents2\get_fft\results\actual_trj_with_errorfb\20241111_output\dynasnn\results.csv
+
+  label: #凡例のラベル
+    text: "$pos_{y}$" 
+
+  xcol: timescale #x軸の列名 列番号でもOK
+  ycol:  Ty/T1 #y軸の列名 列番号でもOK
+  stdcol:  #標準偏差の列名 列番号でもOK. nullでもOK
+
+  color: [155,217,60] #グラフの色
+
+  marker:
+    style: "x" #o, s, x, +, *
+    size: 8
+
+  linestyle:
+    style: "" #-, --, -., :, steps, ...
+    width: 2
+

@@ -4,8 +4,8 @@ canvas:
   frame_visible: false #枠を表示するかどうか
 
   figsize:
-    width: 15 #[cm]
-    height: 15 #[cm]
+    width: 10 #[cm]
+    height: 10 #[cm]
 
   fontstyle: 
     family: "serif" #Arial, serif
@@ -39,19 +39,18 @@ canvas:
 
 
   legend: #凡例のフォントサイズ
-    visible: true
-    fontsize: 10
-    bbox_to_anchor: [0.5, 1.4] #legendの位置の調整 [x座標, y座標] (これは色々いじってみる)
-    ncol: 2 #legendの列数
-
+    visible: false
+    fontsize: 12
+    loc: lower center #upper right, upper left, lower left, lower right
 
   grid:
+    visible: true
     alpha: 0.0
 
   limit: #xy軸の範囲
-    xmin: 0
-    xmax: 80
-    ymin: 0
+    xmin: 300
+    xmax: 500
+    ymin: -0.1
     ymax: null
 
   axscale: #xy軸のスケール. 対数軸か否か
@@ -61,5 +60,5 @@ canvas:
   margin: #グラフの余白差分. グラフの余白がデフォルトからどれくらい変更されるか
     left: 0. #[cm]
     right: 0 #[cm]
-    top: -0 #[cm]
-    bottom: -0 #[cm]
+    top: 0 #[cm]
+    bottom: 0 #[cm]

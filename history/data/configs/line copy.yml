@@ -1,0 +1,20 @@
+line:
+  csvpath: C:\Users\3meko\Dev\my_tools\RealtimeGraphViewer\test\testdata2.csv
+  xcol: 0
+  ycol: 1
+  stdcol: 2
+
+  color: [0,255,0]
+
+  marker:
+    style: "" #o, s, x, +, *
+    size: 2
+
+  linestyle:
+    style: "-" #-, --, -., :, steps, ...
+    width: 6
+
+  label: 
+    text: "redline"
+    fontsize: 16
+

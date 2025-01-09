@@ -1,0 +1,44 @@
+# グラフ全体の設定
+canvas:
+
+  figsize:
+    width: 20 #[cm]
+    height: 10 #[cm]
+
+  fontstyle: 
+    family: "serif" #Arial, serif
+
+  title: #グラフタイトル
+    text: "title"
+    fontsize: 30
+
+  label: #xy軸のラベル
+    xlabel: xlabel
+    ylabel: ylabel
+    fontsize: 18
+
+  legend: #凡例のフォントサイズ
+    fontsize: 12
+
+  grid:
+    alpha: 0.0
+
+  limit: #xy軸の範囲
+    xmin: 0
+    xmax: null
+    ymin: -0.5
+    ymax: 2.5
+
+  ticks: # 目盛りの幅. limitにnullが指定されると無視される
+    xwidth: 5 
+    xbias: 0 #x軸の実際のgrid線のbias
+
+    ywidth: 3
+    ybias: 0.5 #y軸の実際のgrid線のbias
+
+    fontsize: 12
+    num_decimal_places: 0 #小数点以下の桁数
+
+  axscale: #xy軸のスケール. 対数軸か否か
+    x: linear #linear, log
+    y: linear #linear, log

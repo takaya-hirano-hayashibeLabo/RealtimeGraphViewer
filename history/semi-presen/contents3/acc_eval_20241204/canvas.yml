@@ -1,0 +1,64 @@
+# グラフ全体の設定
+canvas:
+  seaborn_style: "darkgrid" #darkgrid, seaborn-whitegrid
+  frame_visible: false #枠を表示するかどうか
+
+  figsize:
+    height: 7.88 #[cm]
+    width: 15.82 #[cm]
+
+  fontstyle: 
+    family: "serif" #Arial, serif
+
+  title: #グラフタイトル
+    text: 
+    fontsize: 18
+
+  label: #xy軸のラベル
+    xlabel: "timescale : $a$"
+    ylabel: Accuracy
+    fontsize: 28
+
+  ticks: # 目盛りの幅. limitにnullが指定されると無視される
+
+    visible: 
+      xlabel: false
+      ylabel: true
+
+    xwidth: 2
+    xbias: 0
+    xlabel_bias: 0
+
+    ywidth: 5
+    ybias: 0
+    ylabel_bias: 0
+
+    fontsize: 16
+    num_decimal_places: 1 #小数点以下の桁数
+    num_type: decimal #decimal, scientific
+
+  legend: #凡例のフォントサイズ
+    visible: true
+    fontsize: 16
+    loc: lower center #upper right, upper left, lower left, lower right
+
+  grid:
+    alpha: 0.5
+
+  limit: #xy軸の範囲
+    xmin: 0.1
+    xmax: null
+    ymin: null
+    ymax: 1.0
+
+  axscale: #xy軸のスケール. 対数軸か否か
+    x: log #linear, log
+    y: linear #linear, log
+
+  margin: #グラフの余白差分. グラフの余白がデフォルトからどれくらい変更されるか
+    left: 0.5 #[cm]
+    right: -1.5 #[cm]
+    top: -0.9 #[cm]
+    bottom: 0.5 #[cm]
+
+

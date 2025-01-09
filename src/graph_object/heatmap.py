@@ -26,12 +26,14 @@ class Heatmap(ILine):
         """
         values=self.__get_values()
         val_min,val_max=self.__get_value_range()
+        norm=self.__get_color_norm(val_min,val_max)
         im=ax.imshow(
             values,aspect='auto',
             cmap=self.config["cmap"],
             interpolation='nearest',
-            norm=self.__get_color_norm(),
-            vmin=val_min,vmax=val_max
+            norm=norm,
+            vmin=None if norm else val_min,  # linearの場合はvminを直接渡す
+            vmax=None if norm else val_max   # linearの場合はvmaxを直接渡す
         )
 
         return im
@@ -42,15 +44,14 @@ class Heatmap(ILine):
             values=values.T
         return values
 
-    def __get_color_norm(self):
-        color_norm_key=self.config["colorbar"]["ticks"]["norm"]
-        if color_norm_key=="linear":
-            return None
-        elif color_norm_key=="log":
-            return LogNorm()
-        elif color_norm_key=="symlog":
-            return SymLogNorm()
-
+    def __get_color_norm(self, vmin=None, vmax=None):
+        color_norm_key = self.config["colorbar"]["ticks"]["norm"]
+        if color_norm_key == "linear":
+            return None  # linearの場合はNoneを返す
+        elif color_norm_key == "log":
+            return LogNorm(vmin=vmin, vmax=vmax)
+        elif color_norm_key == "symlog":
+            return SymLogNorm(linthresh=1e-3, vmin=vmin, vmax=vmax)
 
     def __set_colorbar(self,im):
         """

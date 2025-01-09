@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from copy import deepcopy
 import yaml
 import seaborn as sns
-sns.set(style="darkgrid")
+# sns.set(style="darkgrid")
 from matplotlib import rcParams
 rcParams['text.usetex'] = True
 import numpy as np
@@ -23,6 +23,7 @@ class Canvas(IGraphObject):
 
     def __init_canvas(self,config: dict):
         # Example of using the configuration
+        self.__set_seaborn_style()
         rcParams['font.family'] = config['fontstyle']['family']
 
         self.figure, self.ax = plt.subplots(1,1,figsize=(
@@ -59,7 +60,7 @@ class Canvas(IGraphObject):
 
         self.load_config()
         self.__init_canvas(self.config)
-
+        self.__remove_axes_frame()
         for line in lines:
             line.draw(self.ax)
 
@@ -168,8 +169,10 @@ class Canvas(IGraphObject):
             if handles:
                 self.ax.legend(
                     fontsize=self.config['legend']['fontsize'],
-                    loc=self.config['legend']['loc']
-                    )
+                    loc='upper center',  # Change location to upper center
+                    bbox_to_anchor=tuple(self.config['legend']['bbox_to_anchor']),  # Adjust position above the plot
+                    ncol=self.config['legend']['ncol']  # Optional: Adjust number of columns in the legend
+                )
 
 
     def __adjust_margins(self):
@@ -189,3 +192,30 @@ class Canvas(IGraphObject):
             top=min(1, self.figure.subplotpars.top - top / self.figure.get_figheight()),
             bottom=max(0, self.figure.subplotpars.bottom + bottom / self.figure.get_figheight())
         )
+
+    
+    def __set_seaborn_style(self):
+        try:
+            style=self.config["seaborn_style"]
+            sns.set(style=style)
+        except Exception as e:
+            print(e)
+            sns.set(style="darkgrid")
+
+    def __remove_axes_frame(self):
+        """
+        グラフの枠を消す
+        """
+        try:
+            if not self.config["frame_visible"]:
+                for spine in self.ax.spines.values():
+                    spine.set_visible(False)
+                # Remove the ticks
+                self.ax.tick_params(left=False, bottom=False, labelleft=True, labelbottom=True)
+            
+            elif self.config["frame_visible"]:
+                for spine in self.ax.spines.values():
+                    spine.set_visible(True)
+                self.ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=True)
+        except Exception as e:
+            print(e)

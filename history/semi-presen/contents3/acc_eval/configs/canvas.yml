@@ -1,0 +1,61 @@
+# グラフ全体の設定
+canvas:
+
+  figsize:
+    height: 12 #[cm]
+    width: 16 #[cm]
+
+  fontstyle: 
+    family: "serif" #Arial, serif
+
+  title: #グラフタイトル
+    text: 
+    fontsize: 18
+
+  label: #xy軸のラベル
+    xlabel: timescale
+    ylabel: Accuracy
+    fontsize: 22
+
+  ticks: # 目盛りの幅. limitにnullが指定されると無視される
+
+    visible: 
+      xlabel: true
+      ylabel: true
+
+    xwidth: 2
+    xbias: 0
+    xlabel_bias: 0
+
+    ywidth: 5
+    ybias: 0
+    ylabel_bias: 0
+
+    fontsize: 16
+    num_decimal_places: 1 #小数点以下の桁数
+    num_type: decimal #decimal, scientific
+
+  legend: #凡例のフォントサイズ
+    visible: true
+    fontsize: 14
+    loc: lower right #upper right, upper left, lower left, lower right
+
+  grid:
+    alpha: 0.5
+
+  limit: #xy軸の範囲
+    xmin: 0.2
+    xmax: 9.8
+    ymin: 0.5
+    ymax: 1.0
+
+  axscale: #xy軸のスケール. 対数軸か否か
+    x: log #linear, log
+    y: linear #linear, log
+
+  margin: #グラフの余白差分. グラフの余白がデフォルトからどれくらい変更されるか
+    left: 0 #[cm]
+    right: -1 #[cm]
+    top: -1 #[cm]
+    bottom: 1 #[cm]
+
